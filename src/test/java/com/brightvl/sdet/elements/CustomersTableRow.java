@@ -3,10 +3,10 @@ package com.brightvl.sdet.elements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class GroupTableRow {
+public class CustomersTableRow {
     private final WebElement root;
 
-    public GroupTableRow(WebElement root) {
+    public CustomersTableRow(WebElement root) {
         this.root = root;
     }
 

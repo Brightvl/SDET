@@ -1,7 +1,7 @@
 package com.brightvl.sdet.tests;
 
 
-import com.brightvl.sdet.page.CustomersPage;
+import com.brightvl.sdet.pom.CustomersPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;

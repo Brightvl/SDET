@@ -1,4 +1,4 @@
-package com.brightvl.sdet.page;
+package com.brightvl.sdet.pom;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,7 +20,7 @@ public class AddCustomerPage {
     private WebElement postCodeField;
 
     @FindBy(css = "button[type='submit']")
-    private WebElement addCustomerButton;
+    private WebElement addCustomerSubmitButton;
 
     public AddCustomerPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -37,6 +37,6 @@ public class AddCustomerPage {
         firstNameField.sendKeys(firstName);
         lastNameField.sendKeys(lastName);
         postCodeField.sendKeys(postCode);
-        addCustomerButton.click();
+        addCustomerSubmitButton.click();
     }
 }

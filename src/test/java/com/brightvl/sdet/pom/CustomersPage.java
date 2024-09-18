@@ -1,6 +1,6 @@
-package com.brightvl.sdet.page;
+package com.brightvl.sdet.pom;
 
-import com.brightvl.sdet.elements.GroupTableRow;
+import com.brightvl.sdet.elements.CustomersTableRow;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,8 +38,8 @@ public class CustomersPage {
         sortByFirstNameButton.click();
 
         return rowsInGroupTable.stream()
-                .map(GroupTableRow::new)
-                .map(GroupTableRow::getFirstName)
+                .map(CustomersTableRow::new)
+                .map(CustomersTableRow::getFirstName)
                 .collect(Collectors.toList());
     }
 
@@ -52,9 +52,9 @@ public class CustomersPage {
         customersTabButton.click();
 
         rowsInGroupTable.stream()
-                .map(GroupTableRow::new)
+                .map(CustomersTableRow::new)
                 .filter(row -> row.getFirstName().equals(name))
                 .findFirst()
-                .ifPresent(GroupTableRow::clickDeleteButton);
+                .ifPresent(CustomersTableRow::clickDeleteButton);
     }
 }

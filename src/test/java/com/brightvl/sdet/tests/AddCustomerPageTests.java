@@ -1,12 +1,9 @@
 package com.brightvl.sdet.tests;
 
-import com.brightvl.sdet.page.AddCustomerPage;
+import com.brightvl.sdet.pom.AddCustomerPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Description;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -47,5 +44,12 @@ public class AddCustomerPageTests {
         String alertText = driver.switchTo().alert().getText();
         Assertions.assertTrue(alertText.contains("Customer added successfully"));
         driver.switchTo().alert().accept();
+    }
+
+    @AfterEach
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
