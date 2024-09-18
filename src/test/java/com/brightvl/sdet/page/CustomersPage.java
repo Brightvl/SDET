@@ -1,5 +1,6 @@
-package com.brightvl.sdet;
+package com.brightvl.sdet.page;
 
+import com.brightvl.sdet.elements.GroupTableRow;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,23 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CustomerPage {
-    private final WebDriver driver;
+public class CustomersPage {
 
-    @FindBy(xpath = "//button[contains(text(),'Add Customer')]")
-    private WebElement addCustomerTabButton;
-
-    @FindBy(css = "input[placeholder='First Name']")
-    private WebElement firstNameField;
-
-    @FindBy(css = "input[placeholder='Last Name']")
-    private WebElement lastNameField;
-
-    @FindBy(css = "input[placeholder='Post Code']")
-    private WebElement postCodeField;
-
-    @FindBy(css = "button[type='submit']")
-    private WebElement addCustomerButton;
 
     @FindBy(xpath = "//button[contains(text(),'Customers')]")
     private WebElement customersTabButton;
@@ -36,25 +22,11 @@ public class CustomerPage {
     private List<WebElement> rowsInGroupTable;
 
 
-    public CustomerPage(WebDriver driver) {
-        this.driver = driver;
+    public CustomersPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
 
-    /**
-     * Создает клиента
-     *
-     * @param firstName имя
-     * @param lastName  фамилия
-     * @param postCode  почтовый индекс
-     */
-    public void addCustomer(String firstName, String lastName, String postCode) {
-        addCustomerTabButton.click();
-        firstNameField.sendKeys(firstName);
-        lastNameField.sendKeys(lastName);
-        postCodeField.sendKeys(postCode);
-        addCustomerButton.click();
-    }
+
 
     /**
      * Позволяет вернуть имена из таблицы пользователей

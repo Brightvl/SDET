@@ -1,4 +1,4 @@
-package com.brightvl.sdet;
+package com.brightvl.sdet.elements;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

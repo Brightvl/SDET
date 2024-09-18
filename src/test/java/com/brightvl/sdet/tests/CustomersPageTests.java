@@ -1,6 +1,7 @@
-package com.brightvl.sdet;
+package com.brightvl.sdet.tests;
 
 
+import com.brightvl.sdet.page.CustomersPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.*;
@@ -14,13 +15,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.brightvl.sdet.DataGenerator.generateNameFromPostCode;
-import static com.brightvl.sdet.DataGenerator.generatePostCode;
-
-public class CustomerTests {
+public class CustomersPageTests {
     private WebDriver driver;
     private static ChromeOptions options;
-    private CustomerPage customerPage;
+    private CustomersPage customerPage;
 
     @BeforeAll
     public static void setUpBeforeClass() {
@@ -34,23 +32,9 @@ public class CustomerTests {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager");
-        customerPage = new CustomerPage(driver);
+        customerPage = new CustomersPage(driver);
     }
 
-
-    @Test
-    @Description("Добавление клиента в систему")
-    public void testAddCustomer() {
-        String postCode = generatePostCode();
-        String firstName = generateNameFromPostCode(postCode);
-        String lastName = generateNameFromPostCode(postCode);
-
-        customerPage.addCustomer(firstName, lastName, postCode);
-
-        String alertText = driver.switchTo().alert().getText();
-        Assertions.assertTrue(alertText.contains("Customer added successfully"));
-        driver.switchTo().alert().accept();
-    }
 
     @Test
     @Description("Проверка выполнения сортировки по именам")
