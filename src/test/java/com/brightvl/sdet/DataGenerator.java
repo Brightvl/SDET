@@ -1,19 +1,19 @@
 package com.brightvl.sdet;
 
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class DataGenerator {
+    private static final Random random = new Random();
     /**
      * Генерирует почтовый индекс
      * @return строка с индексом
      */
     public static String generatePostCode() {
-        Random random = new Random();
-        StringBuilder postCode = new StringBuilder();
-        for (int i = 0; i < 10; i++) {
-            postCode.append(random.nextInt(10));
-        }
-        return postCode.toString();
+        return IntStream.range(0, 10)
+                .mapToObj(i -> String.valueOf(random.nextInt(10)))
+                .collect(Collectors.joining());
     }
 
     /**

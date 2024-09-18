@@ -1,6 +1,5 @@
 package com.brightvl.sdet;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,7 +11,6 @@ import java.util.stream.Collectors;
 public class CustomerPage {
     private final WebDriver driver;
 
-    // Используем аннотации @FindBy для определения элементов
     @FindBy(xpath = "//button[contains(text(),'Add Customer')]")
     private WebElement addCustomerTabButton;
 
@@ -34,8 +32,8 @@ public class CustomerPage {
     @FindBy(xpath = "//a[@ng-click=\"sortType = 'fName'; sortReverse = !sortReverse\"]")
     private WebElement sortByFirstNameButton;
 
-    @FindBy(css = "table.table tbody tr td:nth-child(1)")
-    private List<WebElement> customerNameColumn;
+    @FindBy(css = "table.table tbody tr")
+    private List<WebElement> rowsInGroupTable;
 
 
     public CustomerPage(WebDriver driver) {
@@ -66,8 +64,10 @@ public class CustomerPage {
     public List<String> getCustomerNames() {
         customersTabButton.click();
         sortByFirstNameButton.click();
-        return customerNameColumn.stream()
-                .map(WebElement::getText)
+
+        return rowsInGroupTable.stream()
+                .map(GroupTableRow::new)
+                .map(GroupTableRow::getFirstName)
                 .collect(Collectors.toList());
     }
 
@@ -77,13 +77,12 @@ public class CustomerPage {
      * @param name имя
      */
     public void deleteCustomerByName(String name) {
-        List<WebElement> rows = driver.findElements(By.cssSelector("table.table tbody tr"));
-        for (WebElement row : rows) {
-            String rowName = row.findElement(By.cssSelector("td:nth-child(1)")).getText();
-            if (rowName.equals(name)) {
-                row.findElement(By.cssSelector("button")).click();
-                break;
-            }
-        }
+        customersTabButton.click();
+
+        rowsInGroupTable.stream()
+                .map(GroupTableRow::new)
+                .filter(row -> row.getFirstName().equals(name))
+                .findFirst()
+                .ifPresent(GroupTableRow::clickDeleteButton);
     }
 }
