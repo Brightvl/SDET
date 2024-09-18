@@ -3,6 +3,8 @@ package com.brightvl.sdet;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,19 +12,36 @@ import java.util.stream.Collectors;
 public class CustomerPage {
     private final WebDriver driver;
 
-    private final By addCustomerTabButton = By.xpath("//button[contains(text(),'Add Customer')]");
-    private final By firstNameField = By.cssSelector("input[placeholder='First Name']");
-    private final By lastNameField = By.cssSelector("input[placeholder='Last Name']");
-    private final By postCodeField = By.cssSelector("input[placeholder='Post Code']");
-    private final By addCustomerButton = By.cssSelector("button[type='submit']");
-    private final By customersTabButton = By.xpath("//button[contains(text(),'Customers')]");
-    private final By sortByFirstNameButton = By.xpath("//a[@ng-click=\"sortType = 'fName'; sortReverse = !sortReverse\"]");
-    private final By customerNameColumn = By.cssSelector("table.table tbody tr td:nth-child(1)");
+    // Используем аннотации @FindBy для определения элементов
+    @FindBy(xpath = "//button[contains(text(),'Add Customer')]")
+    private WebElement addCustomerTabButton;
+
+    @FindBy(css = "input[placeholder='First Name']")
+    private WebElement firstNameField;
+
+    @FindBy(css = "input[placeholder='Last Name']")
+    private WebElement lastNameField;
+
+    @FindBy(css = "input[placeholder='Post Code']")
+    private WebElement postCodeField;
+
+    @FindBy(css = "button[type='submit']")
+    private WebElement addCustomerButton;
+
+    @FindBy(xpath = "//button[contains(text(),'Customers')]")
+    private WebElement customersTabButton;
+
+    @FindBy(xpath = "//a[@ng-click=\"sortType = 'fName'; sortReverse = !sortReverse\"]")
+    private WebElement sortByFirstNameButton;
+
+    @FindBy(css = "table.table tbody tr td:nth-child(1)")
+    private List<WebElement> customerNameColumn;
+
 
     public CustomerPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
-
 
     /**
      * Создает клиента
@@ -32,11 +51,11 @@ public class CustomerPage {
      * @param postCode  почтовый индекс
      */
     public void addCustomer(String firstName, String lastName, String postCode) {
-        click(addCustomerTabButton);
-        type(firstNameField, firstName);
-        type(lastNameField, lastName);
-        type(postCodeField, postCode);
-        click(addCustomerButton);
+        addCustomerTabButton.click();
+        firstNameField.sendKeys(firstName);
+        lastNameField.sendKeys(lastName);
+        postCodeField.sendKeys(postCode);
+        addCustomerButton.click();
     }
 
     /**
@@ -45,9 +64,9 @@ public class CustomerPage {
      * @return список имен
      */
     public List<String> getCustomerNames() {
-        click(customersTabButton);
-        click(sortByFirstNameButton);
-        return driver.findElements(customerNameColumn).stream()
+        customersTabButton.click();
+        sortByFirstNameButton.click();
+        return customerNameColumn.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
@@ -66,13 +85,5 @@ public class CustomerPage {
                 break;
             }
         }
-    }
-
-    private void click(By locator) {
-        driver.findElement(locator).click();
-    }
-
-    private void type(By locator, String text) {
-        driver.findElement(locator).sendKeys(text);
     }
 }
