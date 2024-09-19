@@ -29,18 +29,28 @@ public class CustomersPage {
 
 
     /**
-     * Позволяет вернуть имена из таблицы пользователей
+     * Возвращает имена клиентов, с возможностью сортировки по алфавиту.
      *
+     * @param sorted если true, то имена сортируются по алфавиту
      * @return список имен
      */
-    public List<String> getCustomerNames() {
+    public List<String> getCustomerNames(boolean sorted) {
         customersTabButton.click();
-        sortByFirstNameButton.click();
-
+        if (sorted) {
+            sortByFirstNameButton.click();
+        }
         return rowsInGroupTable.stream()
                 .map(CustomersTableRow::new)
                 .map(CustomersTableRow::getFirstName)
                 .collect(Collectors.toList());
+    }
+    /**
+     * Возвращает имена клиентов. По умолчанию возвращает неотсортированные имена.
+     *
+     * @return список имен
+     */
+    public List<String> getCustomerNames() {
+        return getCustomerNames(false);
     }
 
     /**
