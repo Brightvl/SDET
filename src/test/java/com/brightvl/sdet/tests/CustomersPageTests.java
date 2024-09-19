@@ -37,7 +37,6 @@ public class CustomersPageTests extends BaseTest {
     @Test
     @Description("Проверка удаления пользователя по среднему количеству букв в имени")
     public void testDeleteCustomerWithClosestNameLengthToAverage() {
-        System.out.println("Executing testDeleteCustomerWithClosestNameLengthToAverage in thread: " + Thread.currentThread().getName());
         List<String> customerNames = customerPage.getCustomerNames();
         List<Integer> nameLengths = customerNames.stream()
                 .map(String::length)
