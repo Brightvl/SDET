@@ -78,6 +78,17 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.22/aspectjweaver-1.9.22.jar"
                     </argLine>
+                    <systemPropertyVariables>
+                        <junit.jupiter.execution.parallel.enabled>
+                            true
+                        </junit.jupiter.execution.parallel.enabled>
+                        <junit.jupiter.execution.parallel.mode.default>
+                            concurrent
+                        </junit.jupiter.execution.parallel.mode.default>
+                        <junit.jupiter.execution.parallel.config.fixed.parallelism>
+                            4
+                        </junit.jupiter.execution.parallel.config.fixed.parallelism>
+                    </systemPropertyVariables>
                 </configuration>
                 <dependencies>
                     <dependency>
