@@ -1,5 +1,7 @@
 package com.brightvl.sdet.pom;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,11 +34,17 @@ public class AddCustomerPage {
      * @param lastName  фамилия
      * @param postCode  почтовый индекс
      */
+    @Step("Добавление клиента с именем {firstName}, фамилией {lastName} и почтовым индексом {postCode}")
     public void addCustomer(String firstName, String lastName, String postCode) {
+        Allure.step("Открытие вкладки добавления клиента");
         addCustomerTabButton.click();
+        Allure.step("Ввод имени клиента");
         firstNameField.sendKeys(firstName);
+        Allure.step("Ввод фамилии клиента");
         lastNameField.sendKeys(lastName);
+        Allure.step("Ввод почтового индекса клиента");
         postCodeField.sendKeys(postCode);
+        Allure.step("Нажатие на кнопку добавления клиента");
         addCustomerSubmitButton.click();
     }
 }

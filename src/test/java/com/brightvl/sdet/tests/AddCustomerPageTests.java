@@ -1,6 +1,7 @@
 package com.brightvl.sdet.tests;
 
 import com.brightvl.sdet.pom.AddCustomerPage;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,12 +23,15 @@ public class AddCustomerPageTests extends BaseTest {
     @Test
     @Description("Добавление клиента в систему")
     public void testAddCustomer() {
+        Allure.step("Начало теста по добавлению клиента");
+
         String postCode = generatePostCode();
         String firstName = generateNameFromPostCode(postCode);
         String lastName = generateNameFromPostCode(postCode);
 
         page.addCustomer(firstName, lastName, postCode);
 
+        Allure.step("Проверка успешного добавления клиента");
         String alertText = driver.switchTo().alert().getText();
         Assertions.assertTrue(alertText.contains("Customer added successfully"));
         driver.switchTo().alert().accept();
