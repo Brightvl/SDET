@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 public class CustomersPage {
 
 
-    @FindBy(xpath = "//button[contains(text(),'Customers')]")
+    @FindBy(xpath = "//button[contains(@class, 'btn') and contains(text(), 'Customers')]")
     private WebElement customersTabButton;
 
-    @FindBy(xpath = "//a[@ng-click=\"sortType = 'fName'; sortReverse = !sortReverse\"]")
+    @FindBy(xpath = "//a[contains(@ng-click, 'sortType') and contains(@ng-click, 'fName')]")
     private WebElement sortByFirstNameButton;
 
     @FindBy(css = "table.table tbody tr")
@@ -67,8 +67,6 @@ public class CustomersPage {
     public void deleteCustomerByName(String name) {
         Allure.step("Открытие вкладки Customers");
         customersTabButton.click();
-
-
         Allure.step("Формирование списка с именами клиентов");
         rowsInGroupTable.stream()
                 .map(CustomersTableRow::new)

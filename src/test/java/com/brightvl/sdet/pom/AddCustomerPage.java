@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AddCustomerPage {
 
-    @FindBy(xpath = "//button[contains(text(),'Add Customer')]")
+    @FindBy(xpath = "//button[contains(@class, 'btn') and contains(text(),'Add Customer')]")
     private WebElement addCustomerTabButton;
 
     @FindBy(css = "input[placeholder='First Name']")

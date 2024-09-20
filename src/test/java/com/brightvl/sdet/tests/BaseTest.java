@@ -1,6 +1,7 @@
 package com.brightvl.sdet.tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,6 +25,7 @@ public class BaseTest {
     }
 
     @BeforeEach
+    @Step("Открытие браузера и загрузка страницы")
     public void setUp() {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -31,9 +33,11 @@ public class BaseTest {
     }
 
     @AfterEach
+    @Step("Закрытие браузера")
     public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
     }
 }
+
