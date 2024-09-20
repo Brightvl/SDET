@@ -27,6 +27,7 @@ public class AddCustomerPage {
     public AddCustomerPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
+
     /**
      * Создает клиента
      *

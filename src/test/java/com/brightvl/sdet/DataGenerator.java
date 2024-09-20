@@ -6,8 +6,10 @@ import java.util.stream.IntStream;
 
 public class DataGenerator {
     private static final Random random = new Random();
+
     /**
      * Генерирует почтовый индекс
+     *
      * @return строка с индексом
      */
     public static String generatePostCode() {
@@ -18,6 +20,7 @@ public class DataGenerator {
 
     /**
      * Создает имя используя индекс
+     *
      * @param postCode индекс
      * @return строка с именем
      */

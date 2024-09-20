@@ -33,7 +33,8 @@ public class AddCustomerPageTests extends BaseTest {
 
         Allure.step("Проверка успешного добавления клиента");
         String alertText = driver.switchTo().alert().getText();
-        Assertions.assertTrue(alertText.contains("Customer added successfully"),
+        Assertions.assertTrue(alertText
+                        .contains("Customer added successfully"),
                 "Ожидалось сообщение 'Customer added successfully', но получено: " + alertText);
         driver.switchTo().alert().accept();
     }

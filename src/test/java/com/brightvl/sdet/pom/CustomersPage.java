@@ -48,6 +48,7 @@ public class CustomersPage {
                 .map(CustomersTableRow::getFirstName)
                 .collect(Collectors.toList());
     }
+
     /**
      * Возвращает имена клиентов. По умолчанию возвращает неотсортированные имена.
      *
@@ -70,8 +71,8 @@ public class CustomersPage {
         Allure.step("Формирование списка с именами клиентов");
         rowsInGroupTable.stream()
                 .map(CustomersTableRow::new)
-                .filter(row -> row.getFirstName().equals(name))
-                .findFirst()
+                .filter(row -> row.getFirstName()
+                        .equals(name)).findFirst()
                 .ifPresent(CustomersTableRow::clickDeleteButton);
     }
 }

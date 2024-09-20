@@ -21,7 +21,6 @@ public class CustomersPageTests extends BaseTest {
         customerPage = new CustomersPage(driver);
     }
 
-
     @Test
     @Description("Проверка выполнения сортировки по именам")
     public void testSortCustomersByName() {
@@ -31,7 +30,8 @@ public class CustomersPageTests extends BaseTest {
         customerNames.sort(Collections.reverseOrder());
 
         Allure.step("Сравнение списков");
-        Assertions.assertEquals(sortedCustomerNames, customerNames, "Имена клиентов должны быть отсортированы по алфавиту.");
+        Assertions.assertEquals(sortedCustomerNames,
+                customerNames, "Имена клиентов должны быть отсортированы по алфавиту.");
     }
 
     @Test
@@ -48,14 +48,16 @@ public class CustomersPageTests extends BaseTest {
                 .orElse(0);
 
         String closestName = customerNames.stream()
-                .min(Comparator.comparingInt(name -> Math.abs(name.length() - (int) averageLength)))
+                .min(Comparator
+                        .comparingInt(name -> Math.abs(name.length() - (int) averageLength)))
                 .orElse(null);
 
         Assertions.assertNotNull(closestName, "Клиент для удаления не найден");
         customerPage.deleteCustomerByName(closestName);
         List<String> updatedCustomerNames = customerPage.getCustomerNames();
         Allure.step("Проверка удаления");
-        Assertions.assertFalse(updatedCustomerNames.contains(closestName),
+        Assertions.assertFalse(updatedCustomerNames
+                        .contains(closestName),
                 "Клиент с именем " + closestName + " должен быть удален.");
     }
 }
